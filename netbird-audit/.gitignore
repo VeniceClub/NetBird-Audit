@@ -1,0 +1,37 @@
+# Runtime secrets and local deployment state
+config.env
+.mysql.env
+*.env.local
+certs/
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Runtime data / dumps
+mysql-data/
+backups/
+*.sql
+*.sql.gz
+*.dump
+*.log
+
+# Build output
+bin/
+*.o
+*.bpf.o
+coverage.out
+
+# Go/editor/OS
+vendor/
+.idea/
+.vscode/
+.DS_Store
+
+# Local archives
+*.tar.gz
+*.zip
+
+# Temporary
+.tmp/
+tmp/

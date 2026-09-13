@@ -1,0 +1,25 @@
+[Unit]
+Description=NetBird Audit V3.4 Server
+After=network-online.target docker.service
+Wants=network-online.target
+Requires=docker.service
+
+[Service]
+Type=simple
+User=netbird-audit
+Group=netbird-audit
+EnvironmentFile=/opt/netbird-audit/config.env
+ExecStart=/opt/netbird-audit/bin/audit-server
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadOnlyPaths=/opt/netbird-audit/certs
+ReadWritePaths=/var/log
+CapabilityBoundingSet=
+AmbientCapabilities=
+
+[Install]
+WantedBy=multi-user.target

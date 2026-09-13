@@ -1,0 +1,3 @@
+interface:
+  display_name: "NetBird Audit Development"
+  short_description: "Develop and debug the Go + eBPF NetBird audit sidecar"

@@ -1,0 +1,23 @@
+[Unit]
+Description=NetBird Audit V3.4 eBPF Sensor
+After=network-online.target netbird.service netbird-audit-server.service
+Wants=network-online.target
+Requires=netbird-audit-server.service
+
+[Service]
+Type=simple
+User=netbird-audit
+Group=netbird-audit
+EnvironmentFile=/opt/netbird-audit/config.env
+ExecStart=/opt/netbird-audit/bin/audit-sensor --interface=${NETBIRD_INTERFACE} --bpf-object=/opt/netbird-audit/bpf/audit.bpf.o --audit-url=http://127.0.0.1:9080/api/v1/flows --sensor-key=${SENSOR_KEY} --overlay-cidr=${OVERLAY_CIDR} --interval=10 --idle=60
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+CapabilityBoundingSet=CAP_BPF CAP_NET_ADMIN CAP_PERFMON CAP_SYS_RESOURCE
+AmbientCapabilities=CAP_BPF CAP_NET_ADMIN CAP_PERFMON CAP_SYS_RESOURCE
+
+[Install]
+WantedBy=multi-user.target
